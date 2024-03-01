@@ -10,6 +10,7 @@ class Player:
         self.homerun = homerun
         self.strikeout = 1 - (single + double + triple + homerun)
 
+    # Simulate a single at-bat result based on the player's percentages
     def get_hit_result(self):
         roll = random.random()
         if roll < self.strikeout:
@@ -23,6 +24,7 @@ class Player:
         else:
             return "Homerun"
 
+# Simulate a game with a specified number of simulations for each player
 def simulate_game(players, num_simulations=100):
     results = {player.name: {"runs": 0, "hits": {"Single": 0, "Double": 0, "Triple": 0, "Homerun": 0, "Strikeout": 0}, "run_history": []} for player in players}
     for _ in range(num_simulations):
@@ -40,6 +42,7 @@ def simulate_game(players, num_simulations=100):
             results[player.name]["run_history"].append(results[player.name]["runs"])
     return results
 
+# Run a simulation scenario with options to reveal different levels of information and plot results
 def run_simulation_scenario(players, num_simulations=100, reveal_names=False, reveal_single_percentage=False, reveal_percentages=False, reveal_hits=False, plot_runs=False):
     results = simulate_game(players, num_simulations)
     winner = max(results, key=lambda x: results[x]["runs"])
@@ -75,7 +78,7 @@ def run_simulation_scenario(players, num_simulations=100, reveal_names=False, re
         plt.show()
     return results
 
-# Sample players with independent percentages
+# Players with percentages
 players = [
     Player("Sammy 'Speedster' Smith", 0.15, 0.05, 0.02, 0.01),
     Player("Bella 'Batter' Brown", 0.18, 0.08, 0.03, 0.02),
